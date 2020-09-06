@@ -1,0 +1,13 @@
+.loginform{
+    display:flex;
+    justify-content: center;
+
+}
+label{
+    padding:1em;
+}
+.butn{
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+}
