@@ -17,7 +17,7 @@ class Dashboard extends Component {
                   <Sidebar />
                 </Col>
                 <Col  xs={10} id="page-content-wrapper">
-                    this is a project component
+                  
                 </Col> 
             </Row>
 
