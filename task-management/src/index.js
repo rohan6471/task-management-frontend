@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from "./components/sidebar.js";
+import Sidebar from "./components/Sidebar.js";
 import './css/dashboard.css'
 
 ReactDOM.render(
@@ -21,14 +21,15 @@ ReactDOM.render(
       <Route exact path="/" component={Login}/>
       <Container fluid>
             <Row>
-                <Col xs={2} id="sidebar-wrapper">      
-                  <Sidebar />
+                <Col xs={2} id="sidebar-wrapper">   
+                <Route  path="/dashboard" component={Sidebar}/>
+                  
                 </Col>
                 <Col  xs={10} id="page-content-wrapper">
 
       <Route exact path="/Dashboard" component={Dashboard}/>
-      <Route exact path="/project" component={Project}/>
-      <Route exact path="/student" component={Student}/>
+      <Route exact path="/dashboard/project" component={Project}/>
+      <Route exact path="/dashboard/student" component={Student}/>
      
                 </Col> 
             </Row>

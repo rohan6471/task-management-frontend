@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import { withRouter } from "react-router";
+
 
 
 class Student extends Component {

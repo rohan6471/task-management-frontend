@@ -30,7 +30,7 @@ constructor(props){
    })
  };
  handleClick(event){
-  this.props.history.push('/Project');
+  this.props.history.push('/dashboard/Project');
     
     var payload={
     "email":this.state.username,
@@ -62,7 +62,7 @@ render() {
     return (
 <Container>
 <Row>
-    <Col></Col>
+    <Col ></Col>
     <Col >
     <Form>
   <Form.Group controlId="formBasicEmail">
@@ -80,7 +80,7 @@ render() {
 </Form>
     
     </Col>
-    <Col></Col>
+    <Col ></Col>
   </Row>
 </Container>
 ); 

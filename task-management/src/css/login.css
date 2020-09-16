@@ -18,3 +18,9 @@ label{
 .login-label{    
     padding-left:90px !important;
 }
+.form{
+    border-width: thin !important;
+    border-color: black !important;
+    padding: 1em !important;
+    border-style: solid !important;
+}

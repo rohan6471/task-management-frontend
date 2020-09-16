@@ -8,14 +8,15 @@ import Header from "./components/Header"
 
 function App() {
   return (
-    <Router>
+    <div></div>
+    // <Router>
       
-      <div>
-        <Header />
-        <br />
-      <Route path="/" exact component={Login} />
-      </div>
-    </Router>
+    //   <div>
+    //     <Header />
+    //     <br />
+    //   <Route path="/" exact component={Login} />
+    //   </div>
+    // </Router>
   );
 }
 

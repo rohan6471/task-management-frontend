@@ -20,10 +20,10 @@ const Side = props => {
             >
                 <div className="sidebar-sticky"></div>
             <Nav.Item>
-                <Nav.Link href="/project">Project</Nav.Link>
+                <Nav.Link href="/dashboard/project">Project</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href="/student" eventKey="link-1">Student</Nav.Link>
+                <Nav.Link href="/dashboard/student" eventKey="link-1">Student</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link eventKey="link-2">Logout</Nav.Link>
