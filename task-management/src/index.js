@@ -7,6 +7,8 @@ import Header from './components/Header.js'
 import Dashboard from './components/Dashboard.js'
 import Project from './components/Project.js'
 import Student from './components/Student.js'
+import Task from './components/Task.js'
+import CreateProject from './components/CreateProject.js'
 import * as serviceWorker from './serviceWorker';
 import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import {BrowserRouter as Router,Route} from 'react-router-dom';
@@ -29,6 +31,8 @@ ReactDOM.render(
 
       <Route exact path="/Dashboard" component={Dashboard}/>
       <Route exact path="/dashboard/project" component={Project}/>
+      <Route path="/dashboard/project/:id" component={Task} />
+      <Route path="/dashboard/createProject" component={CreateProject} />
       <Route exact path="/dashboard/student" component={Student}/>
      
                 </Col> 

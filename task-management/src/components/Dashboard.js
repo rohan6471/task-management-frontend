@@ -13,12 +13,9 @@ class Dashboard extends Component {
         return (
             <Container fluid>
             <Row>
-                <Col xs={2} id="sidebar-wrapper">      
-                  <Sidebar />
-                </Col>
-                <Col  xs={10} id="page-content-wrapper">
+                
                   
-                </Col> 
+                
             </Row>
 
         </Container>
