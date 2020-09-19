@@ -2,6 +2,7 @@ import React from "react";
 import {Nav} from "react-bootstrap";
 import { withRouter } from "react-router";
 import '../css/dashboard.css'
+import {FaFolderOpen,FaUsers,FaSignOutAlt} from "react-icons/fa"
 
 const Side = props => {
 
@@ -20,13 +21,13 @@ const Side = props => {
             >
                 <div className="sidebar-sticky"></div>
             <Nav.Item>
-                <Nav.Link href="/dashboard/project">Project</Nav.Link>
+                <Nav.Link className="sideLink" href="/dashboard/project"><FaFolderOpen />&nbsp;Projects</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href="/dashboard/student" eventKey="link-1">Student</Nav.Link>
+                <Nav.Link className="sideLink"  href="/dashboard/student" eventKey="link-1"><FaUsers />&nbsp;Student Workers</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="link-2">Logout</Nav.Link>
+                <Nav.Link className="sideLink" eventKey="link-2"><FaSignOutAlt />&nbsp;Logout</Nav.Link>
             </Nav.Item>
             
             </Nav>

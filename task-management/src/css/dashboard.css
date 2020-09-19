@@ -27,3 +27,25 @@
     min-width: 0;
     width: 100%;
 }
+.nav-item{
+ 
+    border-bottom: solid #C7CDD1 0.5px;
+    font-family: "Oswald";
+    font-size: 1.2rem;
+   
+    }
+.nav.bg-light{
+    background-color: white !important;
+}
+.sideLink{
+    color: #00674c !important;
+}
+.sideLink:hover{
+    color: #ffffff !important;
+      background: #00674c !important;
+        border-color: #494949 !important;
+        transition: all 0.2s ease 0s;
+}
+.nav{
+    padding-right:0 !important;
+}
