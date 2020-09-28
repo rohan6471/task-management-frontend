@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from './components/Login.js'
-import Header from './components/Header.js'
-import Dashboard from './components/Dashboard.js'
-import Project from './components/Project.js'
-import Student from './components/Student.js'
-import Task from './components/Task.js'
-import CreateProject from './components/CreateProject.js'
+import Login from './components/Login.js';
+import Header from './components/Header.js';
+import Dashboard from './components/Dashboard.js';
+import Project from './components/Project.js';
+import Student from './components/Student.js';
+import Task from './components/Task.js';
+import CreateProject from './components/CreateProject.js';
+import CreateStudent from './components/CreateStudent.js';
 import * as serviceWorker from './serviceWorker';
 import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import {BrowserRouter as Router,Route} from 'react-router-dom';
@@ -34,6 +35,7 @@ ReactDOM.render(
       <Route path="/dashboard/project/:id" component={Task} />
       <Route path="/dashboard/createProject" component={CreateProject} />
       <Route exact path="/dashboard/student" component={Student}/>
+      <Route path="/dashboard/createStudent" component={CreateStudent} />
      
                 </Col> 
             </Row>

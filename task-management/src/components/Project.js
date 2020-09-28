@@ -1,7 +1,7 @@
   import React, { Component } from "react"
 import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
-import {FaCaretRight,FaEye,FaPlus} from "react-icons/fa"
+import {FaCaretRight,FaEye,FaPlus,FaPencilAlt} from "react-icons/fa"
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import '../css/Project.css'
@@ -25,21 +25,23 @@ class Project extends Component {
     render() {
         return (
           <div>
-          <Link to={`/dashboard/createProject`}><Button className="projectBtn"style={{marginLeft:"930px",marginTop:"20px"}} variant="primary"><FaPlus />&nbsp;Create New</Button></Link>
+          <Link className="projectBtn" style={{marginLeft:"930px",marginTop:"20px"}}  to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link>
          
           { 
             this.state.projects.map(project => 
               <Card style={{marginTop:"10px"},{border:"0px"}}>        
-          <Card.Body>
+          <Card.Body className="cardName">
           <Container>
           <Row>   
-            <Col>
-            <Link to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.title}</h4></Link>
+            <Col md="8">
+            <Link className="projectName" to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.title}</h4></Link>
+            <small>Created on {project.duedate.split("T")[0]}</small>
           </Col>
-          <Col></Col>
-          <Col style={{marginLeft:"30em"}}><Button variant="secondary"><FaEye />&nbsp;View Tasks</Button> </Col> 
+          <Col md="2"></Col>
+          <Col md="2" style={{display: "flex",justifyContent: "center"}}><Button className="viewBtn" variant="secondary"><FaEye /></Button> 
+          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Col>
           </Row>
-         </Container>                    
+         </Container>                     
           </Card.Body>  
           </Card>
 
