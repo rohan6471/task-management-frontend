@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from './components/Login.js';
+import Login from './components/Login';
 import Header from './components/Header.js';
 import Dashboard from './components/Dashboard.js';
 import Project from './components/Project.js';

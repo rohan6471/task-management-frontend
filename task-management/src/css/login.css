@@ -1,4 +1,17 @@
-.loginform{
+
+.loginstyles{
+    font-family: "Oswald", Arial, sans-serif;
+  }
+  
+  .submit{
+      color: #00674c;
+  }
+
+
+
+
+
+/* .loginform{
     display:flex;
     justify-content: center;
 
@@ -23,4 +36,4 @@ label{
     border-color: black !important;
     padding: 1em !important;
     border-style: solid !important;
-}
+} */

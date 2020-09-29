@@ -1,0 +1,16 @@
+.studentForm{
+    font-family: Oswald;
+    font-size: 1.2rem;
+    padding:1em;  
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .form-label{
+        padding: 0.5em 0 0.2em 0.2em;
+        margin:0;
+        
+    }
+    .stuForm{
+        padding-top: 30px;
+  
+  
+    }
