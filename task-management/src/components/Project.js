@@ -34,7 +34,7 @@ class Project extends Component {
           <Container>
           <Row>   
             <Col md="8">
-            <Link className="projectName" to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.title}</h4></Link>
+            <Link className="projectName" to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.name}</h4></Link>
             <small>Created on {project.duedate.split("T")[0]}</small>
           </Col>
           <Col md="2"></Col>

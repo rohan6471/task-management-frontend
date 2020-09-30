@@ -13,7 +13,7 @@ class Student extends Component {
         }
       }
       componentDidMount() {
-        axios.get(`http://127.0.0.1:3333//taskmanagement/api/student/getStudents`)
+        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
           .then(res => {
             const students = res.data;
             this.setState({ students });
@@ -30,26 +30,24 @@ class Student extends Component {
             <Table striped bordered hover>
   <thead>
     <tr>
-      <th>Project Id</th>
-      <th>Project Title</th>
-      <th>Assigned To</th>
-      <th>Created On</th>
+      <th>Student Name</th>
+      <th>Student projects</th>
+      <th>Student Email</th>
+      <th>Student Password</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
+  {
+    this.state.students.map(student => 
     <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{student.firstName}</td>
+      <td>projects</td>
+      <td>{student.email}</td>
+      <td>{student.password}</td>
     </tr>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
+    
+    )}
     </tbody>
     </Table>
     </Container>  

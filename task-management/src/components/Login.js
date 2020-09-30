@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  MuiContainerRoot:{
+        marginLeft:"200px !important"
+  },
   textInput: {
     borderColor: "green !important",
     text: "green",
@@ -87,15 +90,17 @@ export default function Login() {
         console.log(res, "here is the respone");
         console.log(res.data, "respone.data");
         if (res.data.message === "success") {
-          console.log("login sucess");
-          // alert("login sucess");
+          
+          document.getElementById("error").innerHTML = ""
+         
           history.push("/dashboard/Project");
         } else if (res.data.message === "failure") {
-          console.log("login fail");
-          alert("login fail");
+         
+          document.getElementById("error").innerHTML= "Incorrect Username and Password"
+          
         } else {
           console.log("doesnt exist");
-          alert("doesnt exist");
+          
         }
       });
   };
@@ -165,6 +170,7 @@ export default function Login() {
             <Button type="submit" fullWidth onClick={submit}>
               Sign In
             </Button>
+            <div id="error" style ={{color:"red",margin:"10px"}}></div>
             <Grid container>
               <Grid item xs>
                 <Link href="#" to={"/forgotpassword/${id}"} color="primary">
