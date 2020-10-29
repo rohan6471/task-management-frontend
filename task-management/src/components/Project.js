@@ -9,6 +9,7 @@ import '../css/Project.css'
 
 
 
+
 class Project extends Component {
     constructor(props){
       super(props);
@@ -30,7 +31,8 @@ class Project extends Component {
               <Row>
               <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaFolderOpen />&nbsp;Projects</h2></Col>
               <Col md="5"></Col>
-              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}><Link className="createStudentBtn" to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link></Col>
+              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}>
+                <Link className="projectBtn" to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link></Col>
                     </Row>
           
          
@@ -45,12 +47,13 @@ class Project extends Component {
       <Link className="projectName" to={`/dashboard/project/${project.id}`}><h5 className="projectName1"><FaCaretRight />{project.name}</h5></Link>
                 
              </Col>
-          <Col md="2"></Col>
-          <Col md="2" style={{display: "flex",justifyContent: "center"}}>
+          <Col md="1"></Col>
+          <Col md="3" style={{display: "flex",justifyContent: "center"}}>
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
             <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
             </Accordion.Toggle>    
-          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Col>
+          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> 
+          <Button className="viewBtn" variant="secondary"><FaTrashAlt /></Button></Col>
           </Row>
     </Card.Header>
     <Accordion.Collapse eventKey="0">

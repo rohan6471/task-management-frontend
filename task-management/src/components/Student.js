@@ -27,10 +27,15 @@ class Student extends Component {
             <Row>
               <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaUsers />&nbsp;Student Workers</h2></Col>
               <Col md="5"></Col>
-              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}><Link className="createStudentBtn" to={`/dashboard/createStudent`}><FaPlus />&nbsp;Create New</Link></Col>
-                    </Row>
+              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.7rem",marginBottom:"0rem"}}>
+                {/* <Link className="createStudentBtn" to={`/dashboard/createStudent`}><FaPlus />
+                &nbsp;Create New</Link></Col> */}
+                 <Link  to={`/dashboard/createStudent`}><Button className="createStudentBtn1" ><FaPlus />&nbsp;Create New</Button>
+                 </Link>
+                  </Col>
+                  </Row>
          
-         <Row>
+         <Row className="studentRow">
             <Table>
   <thead>
     <tr>
