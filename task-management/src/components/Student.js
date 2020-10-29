@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 import {Container, Row, Col, Card, Form, Button , Table} from "react-bootstrap";
 import { withRouter } from "react-router";
-import {FaCaretRight,FaEye,FaPlus,FaPencilAlt} from "react-icons/fa"
+import {FaCaretRight,FaEye,FaPlus,FaPencilAlt, FaTrashAlt,FaUsers,Fabox} from "react-icons/fa"
 import {Link} from 'react-router-dom'
 import axios from 'axios';
+import '../css/Student.css'
 
 class Student extends Component {
     constructor(props){
@@ -24,33 +25,71 @@ class Student extends Component {
         return (
           <Container>
             <Row>
-          <Link style={{marginLeft:"930px",marginTop:"20px"}}  to={`/dashboard/createStudent`}><FaPlus />&nbsp;Create New</Link>
-          </Row>
+              <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaUsers />&nbsp;Student Workers</h2></Col>
+              <Col md="5"></Col>
+              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}><Link className="createStudentBtn" to={`/dashboard/createStudent`}><FaPlus />&nbsp;Create New</Link></Col>
+                    </Row>
          
-            <Table striped bordered hover>
+         <Row>
+            <Table>
   <thead>
     <tr>
+    <th>S.No</th>
       <th>Student Name</th>
-      <th>Student projects</th>
-      <th>Student Email</th>
-      <th>Student Password</th>
+      <th>Projects Assigned</th>
+      <th>Email</th>
+      <th>Password</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-  {
-    this.state.students.map(student => 
-    <tr>
+    { 
+    this.state.students.map(student => {if(student.role!="admin")
+     return <tr>
+      <td>1</td>
       <td>{student.firstName}</td>
       <td>projects</td>
       <td>{student.email}</td>
-      <td>{student.password}</td>
-    </tr>
-    
+      <td>{student.password}<Link className="viewBtn"><FaEye /></Link></td>
+      <td><Link className="viewBtn"><FaPencilAlt /></Link><Link className="viewBtn"><FaTrashAlt /></Link></td>
+      
+    </tr>  
+    }
     )}
     </tbody>
     </Table>
+    </Row>
     </Container>  
+
+// <Container>
+// <Row >
+//   <Col md="9"></Col>
+//   <Col md="1">View By: </Col>
+//   <Col md="2">
+//   <Form>
+// <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+// {/* <Form.Label>View By:</Form.Label> */}
+// <Form.Control as="select" size="md" custom>
+// <option>last 30 days</option>
+// <option>last 60 days</option>
+// <option>last 90 days</option>
+// </Form.Control>
+// </Form.Group>
+// </Form>
+// </Col>
+// </Row>
+// <Row className="orderHeader">
+// <Col>Order Date</Col>
+// <Col>Order Number</Col>
+// <Col>Order Status</Col>
+// </Row>
+// <Row className="orderDetails">
+// <Col>September 30</Col>
+// <Col  className="orderNumber">#9876545678987</Col>
+// <Col style={{color:"Green"}}><h6>Shipped</h6></Col>
+// </Row>
+// </Container>
+
         );
     }
 }

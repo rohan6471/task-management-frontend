@@ -1,10 +1,12 @@
   import React, { Component } from "react"
-import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import {Container, Row, Col, Card, Form, Button,Accordion} from "react-bootstrap";
 import { withRouter } from "react-router";
-import {FaCaretRight,FaEye,FaPlus,FaPencilAlt} from "react-icons/fa"
+import {FaCaretRight,FaEye,FaPlus,FaPencilAlt,FaFolderOpen, FaTrashAlt} from "react-icons/fa"
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import '../css/Project.css'
+
+
 
 
 class Project extends Component {
@@ -24,18 +26,46 @@ class Project extends Component {
 
     render() {
         return (
-          <div>
-          <Link className="projectBtn" style={{marginLeft:"930px",marginTop:"20px"}}  to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link>
+         <Container>
+              <Row>
+              <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaFolderOpen />&nbsp;Projects</h2></Col>
+              <Col md="5"></Col>
+              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}><Link className="createStudentBtn" to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link></Col>
+                    </Row>
+          
          
           { 
             this.state.projects.map(project => 
-              <Card style={{marginTop:"10px"},{border:"0px"}}>        
+              <Accordion style={{padding:"0.5em"}}>
+  <Card >
+    <Card.Header className="projectCard">
+    <Row>   
+            <Col md="8" className="projectName">
+     
+      <Link className="projectName" to={`/dashboard/project/${project.id}`}><h5 className="projectName1"><FaCaretRight />{project.name}</h5></Link>
+                
+             </Col>
+          <Col md="2"></Col>
+          <Col md="2" style={{display: "flex",justifyContent: "center"}}>
+          <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
+            </Accordion.Toggle>    
+          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Col>
+          </Row>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body><small>Due on {project.duedate.split("T")[0]}</small></Card.Body>
+    </Accordion.Collapse>
+  </Card>
+  </Accordion> 
+    )}
+              {/* <Card style={{marginTop:"10px"},{border:"0px"}}>        
           <Card.Body className="cardName">
           <Container>
           <Row>   
             <Col md="8">
             <Link className="projectName" to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.name}</h4></Link>
-            <small>Created on {project.duedate.split("T")[0]}</small>
+            
           </Col>
           <Col md="2"></Col>
           <Col md="2" style={{display: "flex",justifyContent: "center"}}><Button className="viewBtn" variant="secondary"><FaEye /></Button> 
@@ -43,41 +73,17 @@ class Project extends Component {
           </Row>
          </Container>                     
           </Card.Body>  
-          </Card>
+          </Card>          */}
+         
 
-            
-           
-              )}
-              </div>
-               
-        );
+
+ 
+             
+           </Container>    
+
+          );
     }
 }
 export default Project;
 
  
-// <Card style={{marginTop:"10px"}}>
-// <Card.Body>
-// <Link to={`/dashboard/project/${project.id}`}><h4>{project.title}</h4></Link>
-// <span style={{marginRight:"700px"}}>{project.title}</span>
-// <Button variant="secondary">Edit </Button>
-// <Button variant="danger">Delete</Button>
-   
-// </Card.Body>
-
-// </Card>
-
-
-{/* <Card style={{marginTop:"10px"},{border:"0px"}}>        
-          <Card.Body>
-          <Container>
-          <Row>   
-            <Col>
-            <Link to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />Project 1</h4></Link>
-          </Col>
-          <Col></Col>
-          <Col style={{marginLeft:"30em"}}><Button variant="secondary"><FaEye />&nbsp;View Tasks</Button> </Col> 
-          </Row>
-         </Container>                    
-          </Card.Body>  
-          </Card> */}

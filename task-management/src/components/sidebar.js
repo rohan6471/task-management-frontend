@@ -1,8 +1,8 @@
 import React from "react";
-import {Nav} from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { withRouter } from "react-router";
 import '../css/dashboard.css'
-import {FaFolderOpen,FaUsers,FaSignOutAlt} from "react-icons/fa"
+import { FaFolderOpen, FaUsers, FaSignOutAlt } from "react-icons/fa"
 
 const Side = props => {
 
@@ -11,29 +11,29 @@ const Side = props => {
         <>
 
             <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
-            activeKey="/project"
-            onSelect={selectedKey => {
-                if(selectedKey == "link-2"){
-                    props.history.push('/');
-                }
+                activeKey="/project"
+                onSelect={selectedKey => {
+                    if (selectedKey == "link-2") {
+                        props.history.push('/');
+                    }
 
-            }}
+                }}
             >
                 <div className="sidebar-sticky"></div>
-            <Nav.Item>
-                <Nav.Link className="sideLink" href="/dashboard/project"><FaFolderOpen />&nbsp;Projects</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link className="sideLink"  href="/dashboard/student" eventKey="link-1"><FaUsers />&nbsp;Student Workers</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link className="sideLink" eventKey="link-2"><FaSignOutAlt />&nbsp;Logout</Nav.Link>
-            </Nav.Item>
-            
+                <Nav.Item>
+                    <Nav.Link className="sideLink" href="/dashboard/project"><FaFolderOpen />&nbsp;Projects</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link className="sideLink" href="/dashboard/student" eventKey="link-1"><FaUsers />&nbsp;Student Workers</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link className="sideLink" eventKey="link-2"><FaSignOutAlt />&nbsp;Logout</Nav.Link>
+                </Nav.Item>
+
             </Nav>
 
         </>
-        );
-  };
-  const Sidebar = withRouter(Side);
-  export default Sidebar
+    );
+};
+const Sidebar = withRouter(Side);
+export default Sidebar

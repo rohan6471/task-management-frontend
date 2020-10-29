@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  MuiContainerRoot:{
-        marginLeft:"200px !important"
+  MuiContainerRoot: {
+    marginLeft: "200px !important"
   },
   textInput: {
     borderColor: "green !important",
@@ -78,6 +78,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const submit = (e) => {
+    
+    history.push("/dashboard/Project");
     e.preventDefault();
     console.log(email, "email value");
     console.log(password, "passwrd value");
@@ -90,17 +92,17 @@ export default function Login() {
         console.log(res, "here is the respone");
         console.log(res.data, "respone.data");
         if (res.data.message === "success") {
-          
+
           document.getElementById("error").innerHTML = ""
-         
-          history.push("/dashboard/Project");
+
+          // history.push("/dashboard/Project");
         } else if (res.data.message === "failure") {
-         
-          document.getElementById("error").innerHTML= "Incorrect Username and Password"
-          
+
+          document.getElementById("error").innerHTML = "Incorrect Username and Password"
+
         } else {
           console.log("doesnt exist");
-          
+
         }
       });
   };
@@ -170,7 +172,7 @@ export default function Login() {
             <Button type="submit" fullWidth onClick={submit}>
               Sign In
             </Button>
-            <div id="error" style ={{color:"red",margin:"10px"}}></div>
+            <div id="error" style={{ color: "red", margin: "10px" }}></div>
             <Grid container>
               <Grid item xs>
                 <Link href="#" to={"/forgotpassword/${id}"} color="primary">
@@ -189,7 +191,7 @@ export default function Login() {
 
 
 
-/* 
+/*
 import React, { Component } from "react"
 import {Form,Button,Row,Col,Container} from'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -205,7 +207,7 @@ constructor(props){
   }
   this.onEmailChange=this.onEmailChange.bind(this)
   this.onPassChange=this.onPassChange.bind(this)
-  
+
  }
 
  onEmailChange = event => {
@@ -223,7 +225,7 @@ constructor(props){
  };
  handleClick(event){
   this.props.history.push('/dashboard/Project');
-    
+
     var payload={
     "email":this.state.username,
     "password":this.state.password
@@ -234,7 +236,7 @@ constructor(props){
     if(response.data.message === "success"){
     console.log("Login successfull");
     alert("Login Successfull")
-   
+
     }
     else if(response.data === "failure"){
     console.log("Username password do not match");
@@ -249,7 +251,7 @@ constructor(props){
     console.log(error);
     });
     }
-    
+
 render() {
     return (
 <Container>
@@ -270,12 +272,12 @@ render() {
     Submit
   </Button>
 </Form>
-    
+
     </Col>
     <Col ></Col>
   </Row>
 </Container>
-); 
+);
 }
 }
 export default Login; */

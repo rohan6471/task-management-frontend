@@ -22,24 +22,31 @@
         padding-right: 4px !important;
         padding-top: 1.5px !important;
         padding-bottom: 0 !important;
-        margin: 5px!important ;
+        margin-left: 20px!important ;
+        margin-bottom: 9px;
         border:0 !important;
         background: white !important;
-        color: #00674c !important;
+        color: #000000a1 !important;
+        
     }
 
 .projectName{
-    color: #00674c !important;
+   color: #000000a1 !important;    
 }
+.projectName1{
+   margin-top: 0.4em;  
+   padding: 2px; 
+ }
 .projectName:hover{
-    color: #00674c !important;
-      background: #00674c !important;
-        border-color: #494949 !important;
-        transition: all 0.2s ease 0s;
-}
+    color: #000000a1 !important;
+    }
 .cardName{
     border-bottom: solid 1px #C7CDD1;
     font-family: "Oswald";
     padding:1em !important;
 
+}
+.projectCard{
+    background-color: white !important;
+    padding: 2px !important;
 }

@@ -6,6 +6,8 @@ import './App.css';
 import Login from "./components/Login"
 import Header from "./components/Header"
 
+import { Accordion, AccordionTab } from 'primereact/accordion';
+
 function App() {
   return (
     <div></div>

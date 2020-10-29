@@ -10,11 +10,12 @@ import Student from './components/Student.js';
 import Task from './components/Task.js';
 import CreateProject from './components/CreateProject.js';
 import CreateStudent from './components/CreateStudent.js';
+import CreateTask from './components/CreateTask.js'
 import * as serviceWorker from './serviceWorker';
 import {Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import {BrowserRouter as Router,Route,Redirect} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from "./components/sidebar.js";
+import Sidebar from "./components/Sidebar.js";
 import './css/dashboard.css'
 
 ReactDOM.render(
@@ -38,7 +39,8 @@ ReactDOM.render(
       <Route path="/dashboard/createProject" component={CreateProject} />
       <Route exact path="/dashboard/student" component={Student}/>
       <Route path="/dashboard/createStudent" component={CreateStudent} />
-     
+      <Route path="/dashboard/createTask" component={CreateTask} />
+          
                 </Col> 
             </Row>
 
