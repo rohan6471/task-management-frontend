@@ -20,7 +20,18 @@ class Student extends Component {
             this.setState({ students });
           })
       }
-  
+      deletStudent(id){
+        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/deleteStudent/${id}`)
+        .then(res => {
+          console.log(res.data)
+          const pro = this.state.students.filter((val)=>val.id != id)
+          console.log(pro)
+          // const projects = res.data;
+           this.setState({ 
+            students : [...pro]
+            });
+        })
+      }
     render() {
         return (
           <Container>
@@ -56,7 +67,9 @@ class Student extends Component {
       <td>projects</td>
       <td>{student.email}</td>
       <td>{student.password}<Link className="viewBtn"><FaEye /></Link></td>
-      <td><Link className="viewBtn"><FaPencilAlt /></Link><Link className="viewBtn"><FaTrashAlt /></Link></td>
+      <td> <Link className="projectName" to={`/dashboard/student/${student.id}`}> <FaPencilAlt /></Link>
+      <Link className="viewBtn" onClick={()=> this.deletStudent(student.id) }><FaTrashAlt /></Link>
+      </td>
       
     </tr>  
     }

@@ -79,7 +79,7 @@ export default function Login() {
 
   const submit = (e) => {
     
-    history.push("/dashboard/Project");
+   // history.push("/dashboard/Project");
     e.preventDefault();
     console.log(email, "email value");
     console.log(password, "passwrd value");
@@ -95,7 +95,7 @@ export default function Login() {
 
           document.getElementById("error").innerHTML = ""
 
-          // history.push("/dashboard/Project");
+           history.push("/dashboard/Project");
         } else if (res.data.message === "failure") {
 
           document.getElementById("error").innerHTML = "Incorrect Username and Password"

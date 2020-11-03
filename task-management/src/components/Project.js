@@ -24,6 +24,18 @@ class Project extends Component {
           this.setState({ projects });
         })
     }
+    deletProduct(id){
+      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/deleteProject/${id}`)
+      .then(res => {
+        console.log(res.data)
+        const pro = this.state.projects.filter((val)=>val.id != id)
+        console.log(pro)
+        // const projects = res.data;
+         this.setState({ 
+           projects : [...pro]
+          });
+      })
+    }
 
     render() {
         return (
@@ -52,8 +64,8 @@ class Project extends Component {
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
             <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
             </Accordion.Toggle>    
-          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> 
-          <Button className="viewBtn" variant="secondary"><FaTrashAlt /></Button></Col>
+            <Link className="projectName" to={`/dashboard/projectDetail/${project.id}`}> <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Link>
+          <Button className="viewBtn" variant="secondary" onClick={()=> this.deletProduct(project.id) }><FaTrashAlt /></Button></Col>
           </Row>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
