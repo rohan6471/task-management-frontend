@@ -20,6 +20,28 @@ class Student extends Component {
             this.setState({ students });
           })
       }
+      handleChange(event) {
+        console.log("entered searh product")
+        console.log(event.target.value)
+        //this.setState({value: event.target.value});
+        if(event.target.value==''){
+          axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
+          .then(res => {
+            const students = res.data;
+            this.setState({ students });
+          })
+        }
+        else {
+        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/search/${event.target.value}`)
+        .then(res => {
+          this.setState({
+            students:[...res.data]
+          })
+       
+        })
+      }
+  
+      }
       deletStudent(id){
         axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/deleteStudent/${id}`)
         .then(res => {
@@ -37,7 +59,10 @@ class Student extends Component {
           <Container>
             <Row>
               <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaUsers />&nbsp;Student Workers</h2></Col>
-              <Col md="5"></Col>
+              <Col md="2"></Col>
+              <Col md="3">
+              <input type="text" style = {{"marginTop":"0.7rem"}} class="form-control" placeholder="Search students" value={this.state.value} onChange={(e) => {this.handleChange(e)}} />
+              </Col>
               <Col md="3" style={{paddingLeft:"120px",marginTop:"0.7rem",marginBottom:"0rem"}}>
                 {/* <Link className="createStudentBtn" to={`/dashboard/createStudent`}><FaPlus />
                 &nbsp;Create New</Link></Col> */}
