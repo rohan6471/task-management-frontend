@@ -10,6 +10,7 @@ import Student from './components/Student.js';
 import Task from './components/Task.js';
 import CreateProject from './components/CreateProject.js';
 import EditProject from './components/EditProject.js';
+import EditTask from './components/EditTask.js';
 import CreateStudent from './components/CreateStudent.js';
 import EditStudent from './components/EditStudent.js';
 import CreateTask from './components/CreateTask.js'
@@ -38,13 +39,14 @@ ReactDOM.render(
              
       <Route exact path="/Dashboard" component={Dashboard}/>
       <Route exact path="/dashboard/project" component={Project}/>
-      <Route path="/dashboard/project/:id" component={Task} />
+      <Route path="/dashboard/tasks/:id" component={Task} />
       <Route path="/dashboard/projectDetail/:id" component={EditProject} />
       <Route path="/dashboard/createProject" component={CreateProject} />
       <Route exact path="/dashboard/student" component={Student}/>
       <Route path="/dashboard/student/:id" component={EditStudent} />
       <Route path="/dashboard/createStudent" component={CreateStudent} />
-      <Route path="/dashboard/createTask" component={CreateTask} />
+      <Route path="/dashboard/project/createTask/:id" component={CreateTask} />
+      <Route path="/dashboard/EditTask/:id" component={EditTask} />
       <Route path="/dashboard/viewTask" component={ViewTask} />
                 </Col> 
             </Row>

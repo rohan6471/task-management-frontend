@@ -91,7 +91,7 @@ class Student extends Component {
       <td>{student.firstName}</td>
       <td>projects</td>
       <td>{student.email}</td>
-      <td>{student.password}<Link className="viewBtn"><FaEye /></Link></td>
+      <td>{student.password}<Link className="viewBtn"></Link></td>
       <td> <Link className="projectName" to={`/dashboard/student/${student.id}`}> <FaPencilAlt /></Link>
       <Link className="viewBtn" onClick={()=> this.deletStudent(student.id) }><FaTrashAlt /></Link>
       </td>

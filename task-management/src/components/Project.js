@@ -73,7 +73,7 @@ class Project extends Component {
     <Row>   
             <Col md="8" className="projectName">
      
-      <Link className="projectName" to={`/dashboard/project/${project.id}`}><h5 className="projectName1"><FaCaretRight />{project.name}</h5></Link>
+      <Link className="projectName" to={`/dashboard/tasks/${project.id}`}><h5 className="projectName1"><FaCaretRight />{project.name}</h5></Link>
                 
              </Col>
           <Col md="1"></Col>
@@ -91,27 +91,7 @@ class Project extends Component {
   </Card>
   </Accordion> 
     )}
-              {/* <Card style={{marginTop:"10px"},{border:"0px"}}>        
-          <Card.Body className="cardName">
-          <Container>
-          <Row>   
-            <Col md="8">
-            <Link className="projectName" to={`/dashboard/project/${project.id}`}><h4><FaCaretRight />{project.name}</h4></Link>
-            
-          </Col>
-          <Col md="2"></Col>
-          <Col md="2" style={{display: "flex",justifyContent: "center"}}><Button className="viewBtn" variant="secondary"><FaEye /></Button> 
-          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Col>
-          </Row>
-         </Container>                     
-          </Card.Body>  
-          </Card>          */}
-         
-
-
- 
-             
-           </Container>    
+             </Container>    
 
           );
     }

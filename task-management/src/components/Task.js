@@ -2,48 +2,93 @@ import React, { Component } from "react"
 import {Container, Row, Col, Card, Form, Button,Accordion} from "react-bootstrap";
 import {FaCaretRight,FaEye,FaPlus,FaPencilAlt,FaFolderOpen, FaTrashAlt} from "react-icons/fa"
 import {Link} from 'react-router-dom'
+import axios from 'axios';
 import "../css/Project.css"
 
 class Task extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tasks :[]
+    }
 
   }
+  componentDidMount() {
+    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/getTasks/${this.props.match.params.id}`)
+      .then(res => {
+        const taskData = res.data;
+        this.setState({ tasks : taskData  });
+      })
+  }
+  deletProduct(id){
+    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/deleteTask/${id}`)
+    .then(res => {
+      console.log(res.data)
+      const pro = this.state.tasks.filter((val)=>val.id != id)
+      console.log(pro)
+      // const projects = res.data;
+       this.setState({ 
+         tasks : [...pro]
+        });
+    })
+  }
+  handleChange(event) {
+    console.log("entered searh product")
+    console.log(event.target.value)
+    //this.setState({value: event.target.value});
+    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/search/${this.props.match.params.id}/${event.target.value}`)
+    .then(res => {
+      this.setState({
+        tasks:[...res.data]
+      })
+   
+    })
+
+  }
+
 
   render() {
     return (
       <Container>
+         
               <Row>
               <Col md="4"><h2 style={{color:"#00674c",marginTop:"0.5rem"}}><FaFolderOpen />&nbsp;Tasks</h2></Col>
-              <Col md="5"></Col>
-              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}><Link className="createStudentBtn" to={`/dashboard/createProject`}><FaPlus />&nbsp;Create New</Link></Col>
+              <Col md="2"></Col>
+              <Col md="3">
+              <input type="text" style = {{"marginTop":"0.7rem"}} class="form-control" placeholder="Search Task" value={this.state.value} onChange={(e) => {this.handleChange(e)}} />
+              </Col>
+              <Col md="3" style={{paddingLeft:"120px",marginTop:"0.5rem",marginBottom:"0.5rem"}}>
+                <Link className="projectBtn" to={`/dashboard/project/createTask/${this.props.match.params.id}`}><FaPlus />&nbsp;Create New</Link></Col>
                     </Row>
           
          
+          { 
+            this.state.tasks.map(project => 
               <Accordion style={{padding:"0.5em"}}>
   <Card >
     <Card.Header className="projectCard">
     <Row>   
             <Col md="8" className="projectName">
      
-      <Link className="projectName" ><h5 className="projectName1"><FaCaretRight />Task 1</h5></Link>
+     <h5><FaCaretRight />{project.taskName}</h5>
                 
              </Col>
-          <Col md="2"></Col>
-          <Col md="2" style={{display: "flex",justifyContent: "center"}}>
+          <Col md="1"></Col>
+          <Col md="3" style={{display: "flex",justifyContent: "center"}}>
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
             <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
             </Accordion.Toggle>    
-          <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Col>
+            <Link className="projectName" to={`/dashboard/EditTask/${project.id}`}> <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Link>
+          <Button className="viewBtn" variant="secondary" onClick={()=> this.deletProduct(project.id) }><FaTrashAlt /></Button></Col>
           </Row>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
-      <Card.Body>hi</Card.Body>
+      <Card.Body><small>Due on {project.expectedEndDate.split("T")[0]}</small></Card.Body>
     </Accordion.Collapse>
   </Card>
   </Accordion> 
- 
-   </Container>
+    )}
+             </Container>    
     );
   }
 }

@@ -63,8 +63,8 @@ class CreateProject extends Component {
                   <Form.Control required  type="text" ref={this.projectName} placeholder="Title of the project" />
                 </Form.Group>
                 <Form.Group controlId="formGroupdate">
-                  <Form.Label>Project Due Date</Form.Label>
-                  <Form.Control type="date" ref={this.projectdueDate} name="Due date" placeholder="Due date" />
+                  <Form.Label>Project Due Date <span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control required type="date" ref={this.projectdueDate} name="Due date" placeholder="Due date" />
                 </Form.Group>
               </Form.Row>
 
@@ -76,8 +76,8 @@ class CreateProject extends Component {
               <Form.Row>
 
                 <Form.Group as={Col} controlId="formGroupStatus">
-                  <Form.Label>Project Status</Form.Label>
-                  <Form.Control ref={this.projectStatus} as="select" custom>
+                  <Form.Label>Project Status <span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control required ref={this.projectStatus} as="select" custom>
                     <option>New assignee</option>
                     <option>Inactive</option>
                     <option>In Progress</option>
@@ -86,8 +86,8 @@ class CreateProject extends Component {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGroupStatus">
-                  <Form.Label>Assign To</Form.Label>
-                  <Form.Control ref={this.assignTo} as="select" custom>
+                  <Form.Label>Assign To <span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control required ref={this.assignTo} as="select" custom>
                     <option key="select student" value="student">Select Student</option>
                     {this.state.students.map(student => {
                       if (student.role != "admin")

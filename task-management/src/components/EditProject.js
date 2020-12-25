@@ -14,7 +14,8 @@ class EditProject extends Component {
     this.assignToEdit = React.createRef();
     this.state = {
       students: [],
-      project:{}
+      project:{},
+      dateValue:''
     }
   }
   handleSave(e) {
@@ -50,10 +51,13 @@ class EditProject extends Component {
       .then(res => {
         console.log(res.data)
         this.setState({
-          project : res.data[0]
+          project : res.data[0],
+          dateValue : res.data[0].duedate.split("T")[0]
         })
+        console.log("came" + this.state.dateValue)
 
       })
+
 
 
   }
@@ -73,8 +77,9 @@ class EditProject extends Component {
                   <Form.Control required  defaultValue={this.state.project.name} type="text" ref={this.projectNameEdit} placeholder="Title of the project" />
                 </Form.Group>
                 <Form.Group controlId="formGroupdate">
-                  <Form.Label>Project Due Date</Form.Label>
-                  <Form.Control type="date"  defaultValue="11/11/2020"  ref={this.projectdueDateEdit} name="Due date" placeholder="Due date" />
+                  <Form.Label>Project Due Date<span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control  required type="date"  defaultValue={this.state.dateValue
+                  } ref={this.projectdueDateEdit} name="Due date" placeholder="Due date" />
                 </Form.Group>
               </Form.Row>
 
@@ -86,8 +91,8 @@ class EditProject extends Component {
               <Form.Row>
 
                 <Form.Group as={Col} controlId="formGroupStatus">
-                  <Form.Label>Project Status</Form.Label>
-                  <Form.Control  ref={this.projectStatusEdit} as="select" custom>
+                  <Form.Label>Project Status<span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control required ref={this.projectStatusEdit} as="select" custom>
                     <option selected={"New assignee" == this.state.project.status ? true : false}>New assignee</option>
                     <option selected={"Inactive" == this.state.project.status ? true : false}>Inactive</option>
                     <option selected={"In Progress" == this.state.project.status ? true : false}>In Progress</option>
@@ -96,8 +101,8 @@ class EditProject extends Component {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGroupStatus">
-                  <Form.Label>Assign To</Form.Label>
-                  <Form.Control  defaultValue={this.state.project.assignTo} ref={this.assignToEdit} as="select" custom>
+                  <Form.Label>Assign To<span style={{ color: "red" }}>*</span></Form.Label>
+                  <Form.Control required defaultValue={this.state.project.assignTo} ref={this.assignToEdit} as="select" custom>
                     <option key="select student" value="student">Select Student</option>
                     {this.state.students.map(student => {
                       if (student.role != "admin")
