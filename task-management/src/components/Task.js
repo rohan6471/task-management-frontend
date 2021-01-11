@@ -14,14 +14,15 @@ class Task extends Component {
 
   }
   componentDidMount() {
-    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/getTasks/${this.props.match.params.id}`)
+    axios.get(`task/getTasks/${this.props.match.params.id}`)
       .then(res => {
         const taskData = res.data;
         this.setState({ tasks : taskData  });
       })
   }
   deletProduct(id){
-    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/deleteTask/${id}`)
+    if (window.confirm("Are you sure you want to delet Task!")) {
+    axios.get(`task/deleteTask/${id}`)
     .then(res => {
       console.log(res.data)
       const pro = this.state.tasks.filter((val)=>val.id != id)
@@ -32,11 +33,12 @@ class Task extends Component {
         });
     })
   }
+  }
   handleChange(event) {
     console.log("entered searh product")
     console.log(event.target.value)
     //this.setState({value: event.target.value});
-    axios.get(`http://127.0.0.1:3333/taskmanagement/api/task/search/${this.props.match.params.id}/${event.target.value}`)
+    axios.get(`task/search/${this.props.match.params.id}/${event.target.value}`)
     .then(res => {
       this.setState({
         tasks:[...res.data]
@@ -78,12 +80,24 @@ class Task extends Component {
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
             <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
             </Accordion.Toggle>    
-            <Link className="projectName" to={`/dashboard/EditTask/${project.id}`}> <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Link>
+            <Link className="projectName" to={`/dashboard/EditTask/${project.id}`} > <Button className="" variant="btn"><FaPencilAlt /></Button> </Link>
           <Button className="viewBtn" variant="secondary" onClick={()=> this.deletProduct(project.id) }><FaTrashAlt /></Button></Col>
           </Row>
     </Card.Header>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body><small>Due on {project.expectedEndDate.split("T")[0]}</small></Card.Body>
+    <Accordion.Collapse style={{padding:"20px"}} eventKey="0">
+     
+      <Row>
+       <Col md="3">
+       Start Date:  {project.startDate.split("T")[0]}
+        </Col>
+        <Col md="3">
+        Expected End Date :  {project.expectedEndDate.split("T")[0]}
+        </Col>
+        <Col md="3">
+       Status :  {project.status}
+        </Col>
+       
+       </Row>
     </Accordion.Collapse>
   </Card>
   </Accordion> 

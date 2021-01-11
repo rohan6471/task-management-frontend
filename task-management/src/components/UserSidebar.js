@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 import '../css/dashboard.css'
 import { FaFolderOpen, FaUsers, FaSignOutAlt } from "react-icons/fa"
 
-const Side = props => {
+const UserSide = props => {
 
 
     return (
@@ -14,8 +14,6 @@ const Side = props => {
                 activeKey="/project"
                 onSelect={selectedKey => {
                     if (selectedKey == "link-2") {
-                        localStorage.removeItem("access_token");
-                        localStorage.removeItem("user_details");
                         props.history.push('/');
                     }
 
@@ -23,11 +21,9 @@ const Side = props => {
             >
                 <div className="sidebar-sticky"></div>
                 <Nav.Item>
-                    <Nav.Link className="sideLink" href="/dashboard/project"><FaFolderOpen />&nbsp;Projects</Nav.Link>
+                    <Nav.Link className="sideLink" href="/user/project"><FaFolderOpen />&nbsp;Projects</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link className="sideLink" href="/dashboard/student" eventKey="link-1"><FaUsers />&nbsp;Student Workers</Nav.Link>
-                </Nav.Item>
+               
                 <Nav.Item>
                     <Nav.Link className="sideLink" eventKey="link-2"><FaSignOutAlt />&nbsp;Logout</Nav.Link>
                 </Nav.Item>
@@ -37,5 +33,5 @@ const Side = props => {
         </>
     );
 };
-const Sidebar = withRouter(Side);
-export default Sidebar
+const UserSidebar = withRouter(UserSide);
+export default UserSidebar

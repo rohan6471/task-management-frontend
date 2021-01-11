@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +17,9 @@ import Container from "@material-ui/core/Container";
 import "../css/login.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import axios from "axios";
+import { DataContext } from './Context'
 import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,6 +75,7 @@ const themeStyles = createMuiTheme({
 
 export default function Login() {
   let history = useHistory();
+  const { addUserDetails } = useContext(DataContext)
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -84,19 +87,35 @@ export default function Login() {
     console.log(email, "email value");
     console.log(password, "passwrd value");
     axios
-      .post("http://127.0.0.1:3333/taskmanagement/api/auth/login", {
+      .post("auth/login", {
         email,
         password,
       })
       .then((res) => {
         console.log(res, "here is the respone");
         console.log(res.data, "respone.data");
-        if (res.data.message === "success") {
+        if (res.data.message === "success" && res.data.role === "admin") {
 
           document.getElementById("error").innerHTML = ""
-
+          addUserDetails(res.data.value)
+          axios.defaults.headers.common["Authorization"] =
+          "Bearer " + res.data.tokenValue;
+        localStorage.setItem("access_token", "Bearer " + res.data.tokenValue);
+        localStorage.setItem("user_details", JSON.stringify(res.data.value));
            history.push("/dashboard/Project");
-        } else if (res.data.message === "failure") {
+        }
+        else if (res.data.message === "success" && res.data.role === "user") {
+
+          document.getElementById("error").innerHTML = ""
+          addUserDetails(res.data.value)
+          axios.defaults.headers.common["Authorization"] =
+          "Bearer " + res.data.tokenValue;
+        localStorage.setItem("access_token", "Bearer " + res.data.tokenValue);
+        localStorage.setItem("user_details", JSON.stringify(res.data.value));
+           history.push("/user/project");
+        }
+        
+        else if (res.data.message === "failure") {
 
           document.getElementById("error").innerHTML = "Incorrect Username and Password"
 
@@ -175,7 +194,7 @@ export default function Login() {
             <div id="error" style={{ color: "red", margin: "10px" }}></div>
             <Grid container>
               <Grid item xs>
-                <Link href="#" to={"/forgotpassword/${id}"} color="primary">
+                <Link  to={"/forgotpassword/${id}"} color="primary">
                   Forgot password?
                 </Link>
               </Grid>

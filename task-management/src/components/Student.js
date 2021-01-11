@@ -14,7 +14,7 @@ class Student extends Component {
         }
       }
       componentDidMount() {
-        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
+        axios.get(`student/getStudents`)
           .then(res => {
             const students = res.data;
             this.setState({ students });
@@ -25,14 +25,14 @@ class Student extends Component {
         console.log(event.target.value)
         //this.setState({value: event.target.value});
         if(event.target.value==''){
-          axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
+          axios.get(`student/getStudents`)
           .then(res => {
             const students = res.data;
             this.setState({ students });
           })
         }
         else {
-        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/search/${event.target.value}`)
+        axios.get(`student/search/${event.target.value}`)
         .then(res => {
           this.setState({
             students:[...res.data]
@@ -43,7 +43,7 @@ class Student extends Component {
   
       }
       deletStudent(id){
-        axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/deleteStudent/${id}`)
+        axios.get(`student/deleteStudent/${id}`)
         .then(res => {
           console.log(res.data)
           const pro = this.state.students.filter((val)=>val.id != id)

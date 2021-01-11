@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import axios from "axios"
+import {Link} from 'react-router-dom'
 import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import { FaCaretRight, FaEye } from "react-icons/fa"
 import "../css/CreateProject.css"
@@ -26,7 +27,7 @@ class CreateStudent extends Component {
       password: this.password.current.value
     }
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.post(`http://127.0.0.1:3333/taskmanagement/api/student/addStudent`, addStudent)
+    axios.post(`student/addStudent`, addStudent)
       .then(res => {
         if (res.data.message == "student created successfully") {
           this.props.history.push("/dashboard/student")
@@ -66,6 +67,7 @@ class CreateStudent extends Component {
               </Form.Group>
 
               <Button type="submit" className="createBtn" variant="primary">Create Student Worker</Button>
+              <Link  to={"/dashboard/student"} color="primary"><Button type="submit" style={{ marginLeft:"20px"}} className="createBtn" variant="primary">Cancel</Button></Link>
 
             </Form>
           </Col>

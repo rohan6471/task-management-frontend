@@ -3,6 +3,7 @@ import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import { FaCaretRight, FaEye } from "react-icons/fa"
 import "../css/CreateStudent.css"
 import axios from "axios"
+import { Link } from 'react-router-dom'
 
 class EditProject extends Component {
   constructor(props) {
@@ -15,9 +16,17 @@ class EditProject extends Component {
     this.state = {
       students: [],
       project:{},
-      dateValue:''
+      dateValue:'',
+      selectedFile: null,
+      FileName: null,
     }
   }
+  fileSelectHandler = (event) => {
+    this.setState({
+      selectedFile: event.target.files[0],
+      FileName: event.target.files[0].name,
+    });
+  };
   handleSave(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -30,16 +39,23 @@ class EditProject extends Component {
 
     }
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.post(`http://127.0.0.1:3333/taskmanagement/api/project/updateProject/${this.props.match.params.id}`, addProject)
+    axios.post(`project/updateProject/${this.props.match.params.id}`, addProject)
       .then(res => {
         if (res.data.message == "project updated successfully") {
+          console.log("project updated sucesfuly")
+           const data = new FormData();
+           data.append("custom-param-name", this.state.selectedFile);
+           axios.post(`project/upload/${this.props.match.params.id}`, data).then(res =>{
+             console.log("entered file success page")
+             console.log(res)
+           })
           this.props.history.push("/dashboard/project")
         }
 
       })
   }
   componentDidMount() {
-    axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
+    axios.get(`student/getStudents`)
       .then(res => {
         console.log(res.data)
         this.setState({
@@ -47,7 +63,7 @@ class EditProject extends Component {
         })
 
       })
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/getProject/${this.props.match.params.id}`)
+      axios.get(`project/getProject/${this.props.match.params.id}`)
       .then(res => {
         console.log(res.data)
         this.setState({
@@ -115,15 +131,12 @@ class EditProject extends Component {
               <Form.Row>
 
                 <Form.Group controlId="formGroupFile">
-                  <Form.Label>Upload Project Files</Form.Label>
-                  <Form.File as={Col}
-                    id="custom-file"
-                    label="Custom file input"
-                    custom
-                  />
+                <Form.Label>Upload Project Files:</Form.Label>
+                <input type="file" style={{marginLeft:"20px"}} onChange={this.fileSelectHandler} /> 
                 </Form.Group>
               </Form.Row>
               <Button type="submit" className="createBtn" variant="primary">Save Project</Button>
+              <Link  to={"/dashboard/Project"} color="primary"><Button type="submit" style={{ marginLeft:"20px"}} className="createBtn" variant="primary">Cancel</Button></Link>
 
             </Form>
           </Col>

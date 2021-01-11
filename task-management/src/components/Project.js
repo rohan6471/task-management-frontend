@@ -5,10 +5,11 @@ import {FaCaretRight,FaEye,FaPlus,FaPencilAlt,FaFolderOpen, FaTrashAlt} from "re
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import '../css/Project.css'
-
-
-
-
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 class Project extends Component {
     constructor(props){
@@ -18,14 +19,15 @@ class Project extends Component {
       }
     }
     componentDidMount() {
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/getProjects`)
+      axios.get(`project/getProjects`)
         .then(res => {
           const projects = res.data;
           this.setState({ projects });
         })
     }
     deletProduct(id){
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/deleteProject/${id}`)
+      if (window.confirm("Are you sure you want to delet Project!")) {
+      axios.get(`project/deleteProject/${id}`)
       .then(res => {
         console.log(res.data)
         const pro = this.state.projects.filter((val)=>val.id != id)
@@ -36,11 +38,12 @@ class Project extends Component {
           });
       })
     }
+    }
     handleChange(event) {
       console.log("entered searh product")
       console.log(event.target.value)
       //this.setState({value: event.target.value});
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/search/${event.target.value}`)
+      axios.get(`project/search/${event.target.value}`)
       .then(res => {
         this.setState({
           projects:[...res.data]
@@ -49,6 +52,35 @@ class Project extends Component {
       })
 
     }
+    fileDownload = (event,fileName) => {
+      console.log("download valuee   "+event)
+      axios({
+        url : `project/download/${event}`,
+        method : 'GET',
+        responseType : 'blob'
+      })
+      .then(res => {
+        console.log(res)
+     
+          console.log("entered blob objecttt")
+          console.log(res)
+          let url = window.URL.createObjectURL(new Blob([res.data]));
+          console.log(url)
+          let a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;
+          a.click();
+       // });
+
+      })
+      .catch((err)=>{
+        NotificationManager.error(
+          "This project has no files",
+          " ",
+          2000)
+      })
+    
+    };
 
     render() {
         return (
@@ -81,16 +113,30 @@ class Project extends Component {
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
             <Button className="viewBtn" variant="secondary"><FaEye  /></Button> 
             </Accordion.Toggle>    
-            <Link className="projectName" to={`/dashboard/projectDetail/${project.id}`}> <Button className="viewBtn" variant="secondary"><FaPencilAlt /></Button> </Link>
+            <Link className="projectName" to={`/dashboard/projectDetail/${project.id}`}> <Button className="" variant="btn"><FaPencilAlt /></Button> </Link>
           <Button className="viewBtn" variant="secondary" onClick={()=> this.deletProduct(project.id) }><FaTrashAlt /></Button></Col>
           </Row>
     </Card.Header>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body><small>Due on {project.duedate.split("T")[0]}</small></Card.Body>
+    <Accordion.Collapse style={{padding:"20px"}} eventKey="0">
+      <Row>
+       <Col md="3">
+        Due on :  {project.duedate.split("T")[0]}
+        </Col>
+        <Col md="3">
+        Project Status :  {project.status}
+        </Col>
+        <Col md="3">
+       Assigned To :  {project.assignTo}
+        </Col>
+        <Col md="3">
+        <Button  variant="secondary" size="sm" onClick ={()=>this.fileDownload(project.id,project.files)} >Project Files</Button>
+        </Col>
+       </Row>
     </Accordion.Collapse>
   </Card>
   </Accordion> 
     )}
+     <NotificationContainer />
              </Container>    
 
           );

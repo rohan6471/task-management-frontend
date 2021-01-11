@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import axios from "axios"
 import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import { FaCaretRight, FaEye } from "react-icons/fa"
+import {Link} from 'react-router-dom'
 import "../css/CreateProject.css"
 
 
@@ -19,7 +20,7 @@ class EditStudent extends Component {
       }
   }
   componentDidMount() {
-    axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudent/${this.props.match.params.id}`)
+    axios.get(`student/getStudent/${this.props.match.params.id}`)
       .then(res => {
         console.log(res.data)
         this.setState({
@@ -40,7 +41,7 @@ class EditStudent extends Component {
       password: this.passwordEdit.current.value
     }
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.post(`http://127.0.0.1:3333/taskmanagement/api/student/updateStudent/${this.props.match.params.id}`, addStudent)
+    axios.post(`student/updateStudent/${this.props.match.params.id}`, addStudent)
       .then(res => {
         if (res.data.message == "student updated successfully") {
           this.props.history.push("/dashboard/student")
@@ -80,6 +81,7 @@ class EditStudent extends Component {
               </Form.Group>
 
               <Button type="submit" className="createBtn" variant="primary">Save Student</Button>
+              <Link  to={"/dashboard/student"} color="primary"><Button type="submit" style={{ marginLeft:"20px"}} className="createBtn" variant="primary">Cancel</Button></Link>
 
             </Form>
           </Col>

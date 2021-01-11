@@ -3,6 +3,7 @@ import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import { FaCaretRight, FaEye } from "react-icons/fa"
 import "../css/CreateTask.css"
 import axios from "axios"
+import {Link} from 'react-router-dom'
 class CreateTask extends Component {
     constructor(props) {
       super(props);
@@ -34,16 +35,16 @@ class CreateTask extends Component {
   
       }
       axios.defaults.headers.post['Content-Type'] = 'application/json';
-      axios.post(`http://127.0.0.1:3333/taskmanagement/api/task/createTask`, addProject)
+      axios.post(`task/createTask`, addProject)
         .then(res => {
           if (res.data.message == "Task created successfully") {
-            this.props.history.push("/dashboard/project")
+            this.props.history.push(`/dashboard/tasks/${this.props.match.params.id}`)
           }
   
         })
     }
     componentDidMount() {
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/student/getStudents`)
+      axios.get(`student/getStudents`)
       .then(res => {
         console.log(res.data)
         this.setState({
@@ -51,7 +52,7 @@ class CreateTask extends Component {
         })
 
       })
-      axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/getProjects`)
+      axios.get(`project/getProjects`)
         .then(res => {
           console.log(res.data)
           this.setState({
@@ -59,7 +60,7 @@ class CreateTask extends Component {
           })
   
         })
-        axios.get(`http://127.0.0.1:3333/taskmanagement/api/project/getProject/${this.props.match.params.id}`)
+        axios.get(`project/getProject/${this.props.match.params.id}`)
         .then(res => {
           console.log(res.data)
           this.setState({
@@ -108,7 +109,7 @@ class CreateTask extends Component {
                   <option key="select student" value="student">Select Student</option>
                     {this.state.students.map(student => {
                       if (student.role != "admin")
-                        return (<option key={student.firstName} value={student.firstName} selected={student.firstName == this.state.project.assignTo ? true : false}>{student.firstName}</option>)
+                        return (<option key={student.id} value={student.id} selected={student.id == this.state.project.assignTo ? true : false}>{student.firstName}</option>)
                     }
                     )}
                    
@@ -152,7 +153,7 @@ class CreateTask extends Component {
                 </Form.Group>
               </Form.Row>
               <Button type="submit" className="createTaskBtn" variant="primary">Create Task</Button>
-
+              <Link  to={`/dashboard/tasks/${this.props.match.params.id}`} color="primary"><Button type="submit" style={{ marginLeft:"20px"}} className="createBtn" variant="primary">Cancel</Button></Link>
 
 
               </Form>
